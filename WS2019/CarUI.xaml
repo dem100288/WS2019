@@ -1,0 +1,21 @@
+﻿<UserControl x:Name="userControl" x:Class="WS2019.CarUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WS2019"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="30" Width="30" Height="33" RenderTransformOrigin="0.5,0.5">
+    <Grid>
+        <DockPanel>
+            <ProgressBar Name="progressCapacity" BorderThickness="0" Height="4" DockPanel.Dock="Bottom" Foreground="#FFA1B006"/>
+            <ProgressBar Name="progressWear" BorderThickness="0" Height="4" DockPanel.Dock="Bottom" Foreground="#FFB00606"/>
+            <ProgressBar Name="progressFuel" BorderThickness="0" Height="4" DockPanel.Dock="Bottom"/>
+
+            <Image Name="image" Stretch="Fill"/>
+
+        </DockPanel>
+        <Image Name="imageStatus" Width="7" Height="7" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Name="textId" VerticalAlignment="Top" HorizontalAlignment="Right" Text="1" FontSize="10" FontWeight="Bold" Background="White"/>
+    </Grid>
+</UserControl>

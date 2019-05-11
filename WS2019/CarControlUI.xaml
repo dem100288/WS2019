@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="WS2019.CarControlUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WS2019"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Background="#FFCBFFD2" Margin="4,2">
+    <StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                    <Image Name="imStatus" Width="10" Height="10"/>
+                    <!--<Image Name="imageBack"/>-->
+                    <TextBlock Name="textnum" Text="num"/>
+                <TextBlock Name="textId"/>
+            </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Name="imageCan"/>
+                    <TextBlock Name="textFuel"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+                <StackPanel Orientation="Horizontal">
+                    <Image Name="imageWrench"/>
+                    <TextBlock Name="textWear"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Image Name="imageCap"/>
+            <TextBlock Name="textCap"/>
+        </StackPanel>
+        </StackPanel>
+        
+    
+    </Grid>
+        <StackPanel Name="ControlCar">
+            <StackPanel Orientation="Horizontal">
+                <Button Click="Button_Click_2" Content="back" ToolTip="Возвра машины"/>
+                <Button Click="Button_Click_1" Content="fuel" ToolTip="Заправить"/>
+                <Button Click="Button_Click" Content="rep" ToolTip="Починить"/>
+            </StackPanel>
+            <!--<ComboBox Name="combObj" DropDownOpened="combObj_DropDownOpened" SelectionChanged="combObj_SelectionChanged" />-->
+        </StackPanel>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="WS2019.ContainerUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WS2019"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="30" Width="30" Height="30" RenderTransformOrigin="0.5,0.5" MouseUp="UserControl_MouseUp">
+    <Grid>
+        <DockPanel>
+            <ProgressBar Name="progressCapacity" Foreground="#FFB00606" DockPanel.Dock="Bottom" Height="5" BorderThickness="0"/>
+            <Image Name="image" Stretch="Fill"/>
+        </DockPanel>
+        <TextBlock Name="textId" VerticalAlignment="Top" HorizontalAlignment="Right" Text="1" FontSize="10" FontWeight="Bold" Background="White"/>
+    </Grid>
+</UserControl>
