@@ -85,6 +85,10 @@ namespace WS2019
             Speed.Maximum = Settings.MaxSimulationSpeed;
             Speed.Value = Settings.DefaultSimulationSpeed;
             Simulation_OnTimeChange();
+            if (ConnectionToServer.TestConnectToServer())
+                Tools.Message(MessageStatus.Info, Util.Localization.GetText("Text60"));
+            else
+                Tools.Message(MessageStatus.Error, Util.Localization.GetText("Text61"));
         }
 
         private void Simulation_OnMessageStat(string mes)

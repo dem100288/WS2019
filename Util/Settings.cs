@@ -51,7 +51,9 @@ namespace Util
         public static double SecondPerHour { set; get; } = 1;
         public static bool ControlCar { set; get; } = true;
         public static double MonthTest { set; get; } = 10;
-        
+        public static string Server { set; get; } = "";
+        public static string AppKey { set; get; } = "";
+
 
         public static void LoadVar(string name, string value)
         {
@@ -103,6 +105,8 @@ namespace Util
                 case "SecondPerHour": { SecondPerHour = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "ControlCar": { ControlCar = bool.Parse(value); break; }
                 case "MonthTest": { MonthTest = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
+                case "Server": { Server = value; break; }
+                case "AppKey": { AppKey = value; break; }
             }
         }
 

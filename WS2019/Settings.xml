@@ -4,6 +4,10 @@
     <var name="ControlCar" value="true"/>
     <!--Месяцев на тестовую симуляцию-->
     <var name="MonthTest" value="10"/>
+    <!--Сервер для подключения-->
+    <var name="Server" value="http://sev-tworx/Thingworx"/>
+    <!--Ключ-->
+    <var name="AppKey" value="59db5764-ff23-40ed-8b73-b35d7ccb8d30"/>
     <!--Настройки для изображений-->
     <!--Изображение карты. Все координаты указываются в рамках этого изображения в исходных координатах-->
     <var name="map" value="Images/map.png"/>
@@ -568,6 +572,22 @@
     <text name="Text59">
       <lang name="ru-RU">
         Машина {0} не может двигаться или занята
+      </lang>
+      <lang name="en-US">
+        Test
+      </lang>
+    </text>
+    <text name="Text60">
+      <lang name="ru-RU">
+        Сервер доступен
+      </lang>
+      <lang name="en-US">
+        Test
+      </lang>
+    </text>
+    <text name="Text61">
+      <lang name="ru-RU">
+        Ошибка связи с сервером
       </lang>
       <lang name="en-US">
         Test
