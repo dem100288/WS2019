@@ -52,7 +52,7 @@ namespace libgameobject
         public double Fine => fine;
 
         private double FillRate { set; get; } 
-        private double porog { set; get; }
+        //private double porog { set; get; }
 
         private double capacity { set; get; } = 0;
 
@@ -78,8 +78,8 @@ namespace libgameobject
             StatusInfo = new ContainerStatusInfo();
             id = _id;
             point = _node;
-            FillRate = Tools.rand.NextDouble();
-            porog = Tools.rand.NextDouble();
+            FillRate = Settings.KOccupancyContainer * (Tools.rand.Next(Settings.MinKContainer, Settings.MaxKContainer)/100d);
+            //porog = Tools.rand.NextDouble();
         }
 
         public void PayFine()
@@ -92,10 +92,10 @@ namespace libgameobject
         public void GameCicle(double delta)
         {
             if (Repletion) fine += delta * Settings.KFine;
-            double CapacityFill = Tools.rand.NextDouble();
-            double k = Tools.rand.NextDouble();
-            if (k > porog)
-                Capacity += delta * CapacityFill * FillRate;
+            //double CapacityFill = Tools.rand.NextDouble();
+            //double k = Tools.rand.NextDouble();
+            //if (k > porog)
+                Capacity += delta * FillRate;
         }
     }
 }

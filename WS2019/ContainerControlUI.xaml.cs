@@ -33,7 +33,7 @@ namespace WS2019
             textnum.Text = Util.Localization.GetText("Text51");
             textfine.Text = Util.Localization.GetText("Text52");
             container.OnChangeProperty += Container_OnChangeProperty;
-            imageCap.Source = new BitmapImage(new Uri(Settings.ImageCap, UriKind.Relative));
+            imageCap.Source = new BitmapImage(new Uri(Settings.ImageContCap, UriKind.Relative));
             Container_OnChangeProperty(container);
         }
 

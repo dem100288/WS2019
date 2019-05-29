@@ -11,7 +11,7 @@ namespace libgameobject
     public class Dump
     {
         private Node point;
-        private double costTrash { set; get; } = 0.1;
+        private double costTrash { set; get; }
         public double CostTrash => costTrash;
         public Node Point => point;
 
@@ -22,6 +22,7 @@ namespace libgameobject
         {
             id = _id;
             point = _node;
+            costTrash = Settings.CostTrash;
         }
 
         public void Interact(Car car)

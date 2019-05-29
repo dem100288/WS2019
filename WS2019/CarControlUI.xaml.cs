@@ -39,7 +39,7 @@ namespace WS2019
             imageCan.Source = new BitmapImage(new Uri(Settings.ImageCan, UriKind.Relative));
             //imageBack.Source = new BitmapImage(new Uri(Settings.ImageBack, UriKind.Relative));
             imageWrench.Source = new BitmapImage(new Uri(Settings.ImageWrench, UriKind.Relative));
-            imageCap.Source = new BitmapImage(new Uri(Settings.ImageCap, UriKind.Relative));
+            imageCap.Source = new BitmapImage(new Uri(Settings.ImageCarCap, UriKind.Relative));
             if (Settings.ControlCar)
             {
                 ControlCar.Visibility = Visibility.Visible;
@@ -86,8 +86,8 @@ namespace WS2019
         {
             Dispatcher.Invoke(() =>
             {
-                textFuel.Text = string.Format("{0}/{1}", Math.Round(car.Fuel), 100);
-                textWear.Text = string.Format("{0}/{1}", Math.Round(car.Wearout), 100);
+                textFuel.Text = string.Format("{0}/{1}", Math.Round(car.Fuel), Settings.MaxFuel);
+                textWear.Text = string.Format("{0}/{1}", Math.Round(car.Wearout), Settings.LimitWearout);
                 textCap.Text = string.Format("{0}/{1}", Math.Round(car.Capacity), Settings.LimitCapacityCar);
             });
         }

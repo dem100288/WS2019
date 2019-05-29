@@ -19,8 +19,8 @@
                     <TextBlock Name="textnum" Text="num"/>
                 <TextBlock Name="textId"/>
             </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Image Name="imageCan"/>
+                <StackPanel Orientation="Horizontal" >
+                    <Image Name="imageCan" Width="24" Height="24" Stretch="Fill"/>
                     <TextBlock Name="textFuel"/>
             </StackPanel>
         </StackPanel>

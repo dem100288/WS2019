@@ -335,10 +335,11 @@ namespace libgameobject
             {
                 StatusInfo.t1 += delta;
                 var pos = currentPath?.NextStep(Position, delta * Settings.SpeedCar * Settings.WearoutEffectOnSpeed) ?? Position;
-                StatusInfo.t2 += Position.Lenght(pos);
+                double len = Position.Lenght(pos);
+                StatusInfo.t2 += len;
                 Position = pos;
-                Fuel -= delta * Settings.FuelConsumption;
-                Wearout += delta * Settings.WearRate;
+                Fuel -= len * Settings.FuelConsumption;
+                Wearout += len * Settings.WearRate;
             }
         }
     }

@@ -25,7 +25,8 @@ namespace Util
         public static string ImageCan { set; get; } = "";
         public static string ImageBack { set; get; } = "";
         public static string ImageWrench { set; get; } = "";
-        public static string ImageCap { set; get; } = "";
+        public static string ImageCarCap { set; get; } = "";
+        public static string ImageContCap { set; get; } = "";
         public static string ImageCoins { set; get; } = "";
         public static string ImageStart { set; get; } = "";
         public static string ImageStop { set; get; } = "";
@@ -46,7 +47,11 @@ namespace Util
         public static double WearRate { set; get; } = 0.05;
         public static double LimitCapacityCar { set; get; } = 500;
         public static double LimitCapacityContainer { get; set; } = 100;
+        public static double KOccupancyContainer { get; set; } = 0.5;
+        public static int MinKContainer { get; set; } = 50;
+        public static int MaxKContainer { get; set; } = 150;
         public static double KFine { set; get; } = 0.01;
+        public static double CostTrash { set; get; } = 1;
         public static double MaintenanceCostsCar { set; get; } = 50;
         public static double SecondPerHour { set; get; } = 1;
         public static bool ControlCar { set; get; } = true;
@@ -79,7 +84,8 @@ namespace Util
                 case "can": { ImageCan = value; break; }
                 case "back": { ImageBack = value; break; }
                 case "wrench": { ImageWrench = value; break; }
-                case "cap": { ImageCap = value; break; }
+                case "carcap": { ImageCarCap = value; break; }
+                case "contcap": { ImageContCap = value; break; }
                 case "coins": { ImageCoins = value; break; }
                 case "start": { ImageStart = value; break; }
                 case "stop": { ImageStop = value; break; }
@@ -100,7 +106,11 @@ namespace Util
                 case "WearRate": { WearRate = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "LimitCapacityCar": { LimitCapacityCar = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "LimitCapacityContainer": { LimitCapacityContainer = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
+                case "KOccupancyContainer": { KOccupancyContainer = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
+                case "MinKContainer": { MinKContainer = int.Parse(value.Replace(SeparatorInFile, separator)); break; }
+                case "MaxKContainer": { MaxKContainer = int.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "KFine": { KFine = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
+                case "CostTrash": { CostTrash = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "MaintenanceCostsCar": { MaintenanceCostsCar = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "SecondPerHour": { SecondPerHour = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "ControlCar": { ControlCar = bool.Parse(value); break; }
