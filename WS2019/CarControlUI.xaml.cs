@@ -32,6 +32,7 @@ namespace WS2019
             car = _car;
             textId.Text = car.Id.ToString();
             textnum.Text = Util.Localization.GetText("Text51");
+            textTruckModelName.Text = car.Type.Name;
             car.OnChangeProperty += Car_OnChangeProperty;
             car.OnChangeStatus += Car_OnChangeStatus;
             Car_OnChangeProperty(car);
@@ -40,6 +41,8 @@ namespace WS2019
             //imageBack.Source = new BitmapImage(new Uri(Settings.ImageBack, UriKind.Relative));
             imageWrench.Source = new BitmapImage(new Uri(Settings.ImageWrench, UriKind.Relative));
             imageCap.Source = new BitmapImage(new Uri(Settings.ImageCarCap, UriKind.Relative));
+            textFuelMax.Text = Settings.MaxFuel.ToString();
+            textCapMax.Text = car.Type.LimitCapacity.ToString();
             if (Settings.ControlCar)
             {
                 ControlCar.Visibility = Visibility.Visible;
@@ -86,9 +89,9 @@ namespace WS2019
         {
             Dispatcher.Invoke(() =>
             {
-                textFuel.Text = string.Format("{0}/{1}", Math.Round(car.Fuel), Settings.MaxFuel);
-                textWear.Text = string.Format("{0}/{1}", Math.Round(car.Wearout), Settings.LimitWearout);
-                textCap.Text = string.Format("{0}/{1}", Math.Round(car.Capacity), car.Type.LimitCapacity);
+                textFuel.Text = string.Format("{0}", Math.Round(car.Fuel));
+                textWear.Text = string.Format("{0}", Math.Round(car.Wearout/Settings.LimitWearout*100));
+                textCap.Text = string.Format("{0}", Math.Round(car.Capacity));
             });
         }
 

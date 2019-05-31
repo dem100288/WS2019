@@ -5,44 +5,68 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WS2019"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Background="#FFCBFFD2" Margin="4,2">
+             d:DesignHeight="300" d:DesignWidth="300" Margin="4,2" FontFamily="Calibri" FontSize="14">
     <StackPanel>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                    <Image Name="imStatus" Width="10" Height="10"/>
-                    <!--<Image Name="imageBack"/>-->
-                    <TextBlock Name="textnum" Text="num"/>
-                <TextBlock Name="textId"/>
+        <StackPanel x:Name="StackCaption" Orientation="Horizontal" Background="#FFB9B9B9" Opacity="0.745" Height="24">
+            <Image x:Name="imStatus" Width="10" Height="10"/>
+            <!--<Image Name="imageBack"/>-->
+            <TextBlock x:Name="textnum" Text="МАШИНА" FontSize="18" FontFamily="Arial" VerticalAlignment="Center" FontWeight="Bold"/>
+            <TextBlock x:Name="textId" FontFamily="Arial" FontSize="18" Margin="5,0,0,0" Text="1" VerticalAlignment="Center" FontWeight="Bold"/>
+            <TextBlock x:Name="textLeftBreket" TextWrapping="Wrap" Text="[" FontFamily="Arial" FontSize="18" VerticalAlignment="Center" Margin="5,0,0,0"/>
+            <TextBlock x:Name="textTruckModelName" TextWrapping="Wrap" Text="МК-3552-03" FontFamily="Arial" FontSize="18" VerticalAlignment="Center"/>
+            <TextBlock x:Name="textRightBreket" TextWrapping="Wrap" Text="]" FontFamily="Arial" FontSize="18" VerticalAlignment="Center"/>
+        </StackPanel>
+        <Grid x:Name="grid" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel x:Name="StackFuel">
+                <Border x:Name="border" BorderBrush="DarkGray" BorderThickness="1" Height="79" Width="79" CornerRadius="40" Margin="10.5,0">
+                    <Image x:Name="imageCan" Stretch="Fill"/>
+                </Border>
+                <StackPanel x:Name="StackPanelFuelText" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,6,0,0">
+                    <TextBlock x:Name="textFuel" Text="000" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBlock x:Name="textSlash1" TextWrapping="Wrap" Text="/"/>
+                    <TextBlock x:Name="textFuelMax" TextWrapping="Wrap" Text="200"/>
+                    <TextBlock x:Name="textLitres" TextWrapping="Wrap" Text="л" Margin="5,0,0,0"/>
+                </StackPanel>
             </StackPanel>
-                <StackPanel Orientation="Horizontal" >
-                    <Image Name="imageCan" Width="24" Height="24" Stretch="Fill"/>
-                    <TextBlock Name="textFuel"/>
+            <StackPanel x:Name="StackWrench" Grid.Column="1">
+                <Border BorderThickness="1" Height="79" Width="79" Margin="10.5,0" CornerRadius="{Binding CornerRadius, ElementName=border}" BorderBrush="{Binding BorderBrush, ElementName=border}">
+                    <Image x:Name="imageWrench" Margin="0,0,77,77"/>
+                </Border>
+                <StackPanel x:Name="StackWrenchText" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,6,0,0">
+                    <TextBlock x:Name="textWear" Text="100"/>
+                    <TextBlock x:Name="textProcent" TextWrapping="Wrap" Text="%" Margin="5,0,0,0"/>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
-        <StackPanel Grid.Column="1">
-                <StackPanel Orientation="Horizontal">
-                    <Image Name="imageWrench"/>
-                    <TextBlock Name="textWear"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Image Name="imageCap"/>
-            <TextBlock Name="textCap"/>
-        </StackPanel>
-        </StackPanel>
-        
-    
-    </Grid>
-        <StackPanel Name="ControlCar">
-            <StackPanel Orientation="Horizontal">
-                <Button Click="Button_Click_2" Content="back" ToolTip="Возвра машины"/>
-                <Button Click="Button_Click_1" Content="fuel" ToolTip="Заправить"/>
-                <Button Click="Button_Click" Content="rep" ToolTip="Починить"/>
+            <StackPanel x:Name="StackTruck" Grid.Column="3">
+                <Border BorderThickness="1" Height="79" Width="79" CornerRadius="{Binding CornerRadius, ElementName=border}" BorderBrush="{Binding BorderBrush, ElementName=border}">
+                    <Image x:Name="imageCap" Margin="0,0,77,-2"/>
+                </Border>
+                <StackPanel x:Name="StackTruckText" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,6,0,0">
+                    <TextBlock x:Name="textCap" Text="0000"/>
+                    <TextBlock x:Name="textSlash" TextWrapping="Wrap" Text="/"/>
+                    <TextBlock x:Name="textCapMax" TextWrapping="Wrap" Text="9600"/>
+                    <TextBlock x:Name="textKilograms" TextWrapping="Wrap" Text="кг" Margin="5,0,0,0"/>
+                </StackPanel>
             </StackPanel>
+
+
+        </Grid>
+        <StackPanel x:Name="ControlCar" Margin="0,5,0,0" Orientation="Horizontal">
+            <Grid Height="40" Width="300">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Click="Button_Click_1" Content="Топливо" ToolTip="Заправить" Margin="6" Opacity="0.9" BorderThickness="1" Background="#FFB4B4B4" SnapsToDevicePixels="True"/>
+                <Button Click="Button_Click" Content="Ремонт" ToolTip="Починить" Grid.Column="1" Margin="6" Opacity="0.9" Background="#FFB4B4B4"/>
+                <Button Click="Button_Click_2" Content="Вернуть" ToolTip="Возвра машины" Grid.Column="2" Margin="6" Opacity="0.9" Background="#FFB4B4B4"/>
+            </Grid>
             <!--<ComboBox Name="combObj" DropDownOpened="combObj_DropDownOpened" SelectionChanged="combObj_SelectionChanged" />-->
         </StackPanel>
     </StackPanel>
