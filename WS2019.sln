@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libgameobject", "libgameobj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "Util\Util.csproj", "{D4B959AB-EEF2-487B-8F0B-35D125E7F4A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms", "Algorithms\Algorithms.csproj", "{FE518A48-E389-405B-B5B8-8EB4DB316BF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{D4B959AB-EEF2-487B-8F0B-35D125E7F4A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4B959AB-EEF2-487B-8F0B-35D125E7F4A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4B959AB-EEF2-487B-8F0B-35D125E7F4A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE518A48-E389-405B-B5B8-8EB4DB316BF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE518A48-E389-405B-B5B8-8EB4DB316BF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE518A48-E389-405B-B5B8-8EB4DB316BF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE518A48-E389-405B-B5B8-8EB4DB316BF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -31,6 +31,7 @@ namespace WS2019
         public MainWindow()
         {
             InitializeComponent();
+            Algorithm.Init();
 
             Title = Util.Localization.GetText("Title");
             tabConsole.Header = Util.Localization.GetText("Text53");

@@ -145,6 +145,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Algorithms\Algorithms.csproj">
+      <Project>{fe518a48-e389-405b-b5b8-8eb4db316bf2}</Project>
+      <Name>Algorithms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\libgameobject\libgameobject.csproj">
       <Project>{f057d2e0-474d-4d49-be02-7ec4a0bbb465}</Project>
       <Name>libgameobject</Name>

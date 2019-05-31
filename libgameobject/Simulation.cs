@@ -36,6 +36,10 @@ namespace libgameobject
         public delegate void OnMessageStatHandle(string mes);
         public static event OnMessageStatHandle OnMessageStat;
 
+        public delegate void OnUpdateHandle();
+
+        public static OnUpdateHandle OnUpdate;
+
         private static double coins { set; get; }
         public static double Coins
         {
@@ -185,7 +189,7 @@ namespace libgameobject
                         d = l / Settings.TickPerSecond * SpeedSimulation;
                         GameCycle(d);
                     }
-
+                    OnUpdate?.Invoke();
                     Thread.Sleep(50);
                 }
                 catch(Exception ex)
