@@ -29,7 +29,7 @@ namespace WS2019
             InitializeComponent();
 
             car = _car;
-            progressCapacity.Maximum = Settings.LimitCapacityCar;
+            progressCapacity.Maximum = car.Type.LimitCapacity;
             car.OnChangeStatus += Car_OnChangeStatus;
             car.OnChangeProperty += Car_OnChangeProperty;
             car.OnChangePosition += Car_OnChangePosition;
@@ -37,7 +37,7 @@ namespace WS2019
             Car_OnChangePosition(car);
             Car_OnChangeStatus(car);
             Car_OnChangeProperty(car);
-            image.Source = new BitmapImage(new Uri(Settings.ImageCar, UriKind.Relative));
+            image.Source = new BitmapImage(new Uri(car.Type.Image, UriKind.Relative));
             //ToolTip = new CarControlUI(car);
         }
 

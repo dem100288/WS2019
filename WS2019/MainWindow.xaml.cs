@@ -89,6 +89,8 @@ namespace WS2019
                 Tools.Message(MessageStatus.Info, Util.Localization.GetText("Text60"));
             else
                 Tools.Message(MessageStatus.Error, Util.Localization.GetText("Text61"));
+            comboType.ItemsSource = Settings.ListTypeCar;
+            comboType.DisplayMemberPath = "Name";
         }
 
         private void Simulation_OnMessageStat(string mes)
@@ -278,7 +280,14 @@ namespace WS2019
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Simulation.BuyCar();
+            if (comboType.SelectedItem != null)
+            {
+                Simulation.BuyCar((comboType.SelectedItem as TypeCar).Id);
+            }
+            else
+            {
+                Simulation.BuyCar();
+            }
         }
 
         private void ScaleObject_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

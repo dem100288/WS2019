@@ -88,7 +88,7 @@ namespace WS2019
             {
                 textFuel.Text = string.Format("{0}/{1}", Math.Round(car.Fuel), Settings.MaxFuel);
                 textWear.Text = string.Format("{0}/{1}", Math.Round(car.Wearout), Settings.LimitWearout);
-                textCap.Text = string.Format("{0}/{1}", Math.Round(car.Capacity), Settings.LimitCapacityCar);
+                textCap.Text = string.Format("{0}/{1}", Math.Round(car.Capacity), car.Type.LimitCapacity);
             });
         }
 

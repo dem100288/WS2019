@@ -327,13 +327,20 @@ namespace libgameobject
 
         public static void BuyCar()
         {
+            BuyCar(Settings.DefaultTypeByCar);
+        }
+
+        public static void BuyCar(int idType)
+        {
+            var type = Settings.FindTypeById(idType);
+            if (type == null) { Tools.Message(MessageStatus.Info, string.Format(Localization.GetText("Text62"), idType), true); return; }
             if (!SimulationRun) { Tools.Message(MessageStatus.Info, Localization.GetText("Text42"), true); return; }
-            if (Coins < Settings.CostCar) { Tools.Message(MessageStatus.Info, Localization.GetText("Text43"), true); return; }
-            Car car = new Car();
+            if (Coins < type.CostCar) { Tools.Message(MessageStatus.Info, Localization.GetText("Text43"), true); return; }
+            Car car = new Car(type);
             
             int maxId = Cars.Count > 0 ? Cars.Max(c => c.Id) : 0;
             car.Id = maxId + 1;
-            ChangeCoinsDown(Settings.CostCar);
+            ChangeCoinsDown(type.CostCar);
             Cars.Add(car);
             OnCreateCar?.Invoke(car);
             Util.ConnectionToServer.SendDataToServer("Add car");
@@ -410,6 +417,11 @@ namespace libgameobject
                     case "local":
                         {
                             Localization.SetDitionary(set);
+                            break;
+                        }
+                    case "typecar":
+                        {
+                            Settings.LoadTypeCar(set);
                             break;
                         }
                 }

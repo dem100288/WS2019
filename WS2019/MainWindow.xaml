@@ -40,6 +40,10 @@
                 <Slider Name="Speed" MinWidth="100" Maximum="100" TickFrequency="0.01" Value="10" LargeChange="0.01" ValueChanged="Speed_ValueChanged"  Minimum="1" SmallChange="0.01"/>
             </StackPanel>
             <Button Name="BtnAddCar" Content="Add car" Click="Button_Click" RenderTransformOrigin="0.5,0.5" Height="50" VerticalAlignment="Top"/>
+            <StackPanel>
+                <TextBlock Text="Тип машины"/>
+                <ComboBox Name="comboType"/>
+            </StackPanel>
         </StackPanel>
         <GridSplitter Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Background="#FFBFBEBE"/>
         <TabControl Name="tabs" Grid.Row="3" Grid.ColumnSpan="3">

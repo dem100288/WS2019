@@ -22,6 +22,7 @@ namespace libgameobject
         public event OnChangePropertyHandle OnChangeProperty;
 
         public CarStatusInfo StatusInfo;
+        public TypeCar Type { set; get; }
 
         private int id { set; get; }
         public int Id
@@ -95,9 +96,9 @@ namespace libgameobject
             get { return capacity; }
             set
             {
-                if (value >= Settings.LimitCapacityCar)
+                if (value >= Type.LimitCapacity)
                 {
-                    capacity = Settings.LimitCapacityCar;
+                    capacity = Type.LimitCapacity;
                 }
                 else
                 {
@@ -128,8 +129,9 @@ namespace libgameobject
             }
         }
 
-        public Car()
+        public Car(TypeCar type)
         {
+            Type = type;
             StatusInfo = new CarStatusInfo(this);
             Position = Simulation.FindStationById(1).Point.Coordinate;
             Tools.OnChangeScale += Tools_OnChangeScale;
@@ -154,19 +156,22 @@ namespace libgameobject
             if (st != null)
             {
                 double w = 0;
-                if (Simulation.Coins > Wearout*Settings.CostRepairs)
+                if (Simulation.Coins > Wearout * Settings.CostRepairs)
                 {
-                    Simulation.ChangeCoinsDown(Wearout*Settings.CostRepairs);
+                    Simulation.ChangeCoinsDown(Wearout * Settings.CostRepairs);
                     w = wearout;
                     wearout = 0;
                     OnChangeProperty?.Invoke(this);
                 }
                 else
                 {
-                    w = Simulation.Coins / Settings.CostRepairs;
-                    wearout -= Simulation.Coins / Settings.CostRepairs;
-                    OnChangeProperty?.Invoke(this);
-                    Simulation.ChangeCoinsDown(Simulation.Coins);
+                    if (Simulation.Coins > 0)
+                    {
+                        w = Simulation.Coins / Settings.CostRepairs;
+                        wearout -= Simulation.Coins / Settings.CostRepairs;
+                        OnChangeProperty?.Invoke(this);
+                        Simulation.ChangeCoinsDown(Simulation.Coins);
+                    }
                     Tools.Message(MessageStatus.Warning, string.Format(Util.Localization.GetText("Text1"), Id));
                 }
                 StatusInfo.l3.Add(w);
@@ -196,7 +201,7 @@ namespace libgameobject
             if (st != null)
             {
                 double f = 0;
-                if (Simulation.Coins > (Settings.MaxFuel - Fuel)*Settings.CostFuel)
+                if (Simulation.Coins > (Settings.MaxFuel - Fuel) * Settings.CostFuel)
                 {
                     Simulation.ChangeCoinsDown((Settings.MaxFuel - Fuel) * Settings.CostFuel);
                     f = Settings.MaxFuel - Fuel;
@@ -205,13 +210,16 @@ namespace libgameobject
                 }
                 else
                 {
-                    Fuel += Simulation.Coins / Settings.CostFuel;
-                    f = Simulation.Coins / Settings.CostFuel;
-                    Simulation.ChangeCoinsDown(Simulation.Coins);
+                    if (Simulation.Coins > 0)
+                    {
+                        Fuel += Simulation.Coins / Settings.CostFuel;
+                        f = Simulation.Coins / Settings.CostFuel;
+                        Simulation.ChangeCoinsDown(Simulation.Coins);
+                    }
                     Tools.Message(MessageStatus.Warning, string.Format(Localization.GetText("Text4"), Id));
                 }
                 StatusInfo.l2.Add(f);
-                Tools.Message(MessageStatus.Info,string.Format(Localization.GetText("Text5"), Id,Math.Round(f,2)));
+                Tools.Message(MessageStatus.Info, string.Format(Localization.GetText("Text5"), Id, Math.Round(f, 2)));
                 UpdateStatusAfterBroken();
             }
             else
@@ -248,7 +256,7 @@ namespace libgameobject
             {
                 container.StatusInfo.l1.Add(container.Capacity);
                 StatusInfo.t12++;
-                if ((Settings.LimitCapacityCar - Capacity) >= container.Capacity)
+                if ((Type.LimitCapacity - Capacity) >= container.Capacity)
                 {
                     Capacity += container.Capacity;
                     container.Capacity = 0;
@@ -256,8 +264,8 @@ namespace libgameobject
                 else
                 {
                     Tools.Message(MessageStatus.Warning, string.Format(Localization.GetText("Text10"), Id), true);
-                    container.Capacity -= Settings.LimitCapacityCar - Capacity;
-                    Capacity = Settings.LimitCapacityCar;
+                    container.Capacity -= Type.LimitCapacity - Capacity;
+                    Capacity = Type.LimitCapacity;
                 }
             }
         }

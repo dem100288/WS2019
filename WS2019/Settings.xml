@@ -4,6 +4,8 @@
     <var name="ControlCar" value="true"/>
     <!--Месяцев на тестовую симуляцию-->
     <var name="MonthTest" value="10"/>
+    <!--Тип машины по умолчанию, когда он не указан при покупке-->
+    <var name="DefaultTypeByCar" value="1"/>
     <!--Сервер для подключения-->
     <var name="Server" value="http://sev-tworx/Thingworx"/>
     <!--Ключ-->
@@ -12,7 +14,7 @@
     <!--Изображение карты. Все координаты указываются в рамках этого изображения в исходных координатах-->
     <var name="map" value="Images/map.png"/>
     <!--Изображение машины-->
-    <var name="car" value="Images/car.png"/>
+    <!--<var name="car" value="Images/car.png"/>-->
     <!--Изображение статуса "сломано"-->
     <var name="broken" value="Images/broken.png"/>
     <!--Изображение контейнера-->
@@ -47,7 +49,7 @@
     <!--Количество монет в начале симулюции (1 монета = 100 рублей)-->
     <var name="StartCoins" value="85000"/>
     <!--Стоимость покупки машины, монет-->
-    <var name="CostCar" value="42500"/>
+    <!--<var name="CostCar" value="42500"/>-->
     <!--Минимальное значение, может быть дробным-->
     <var name="MinSimulationSpeed" value="1"/>
     <!--Максимальное значение-->
@@ -86,7 +88,7 @@
     <!--коэффициент увеличения износа когда машина двигается за время игрового цикла-->
     <var name="WearRate" value="0.05"/>
     <!--Максимальное значение вместимости машины, кг-->
-    <var name="LimitCapacityCar" value="9600"/>
+    <!--<var name="LimitCapacityCar" value="9600"/>-->
     <!--Издержки на содержание (з/п водителю, ежемесячный техосмотр), монет-->
     <var name="MaintenanceCostsCar" value="500"/>
     
@@ -106,6 +108,11 @@
     <!---->
 
   </variables>
+  <typecar>
+    <type id="1" name="type1" LimitCapacityCar="9600" CostCar="50" image="Images/car.png"/>
+    <type id="2" name="type2" LimitCapacityCar="19200" CostCar="100" image="Images/car.png"/>
+    <type id="3" name="type3" LimitCapacityCar="38400" CostCar="200" image="Images/car.png"/>
+  </typecar>
   <local default="ru-RU">
     <text name="Title">
       <lang name="ru-RU">
@@ -598,6 +605,14 @@
     <text name="Text61">
       <lang name="ru-RU">
         Ошибка связи с сервером
+      </lang>
+      <lang name="en-US">
+        Test
+      </lang>
+    </text>
+    <text name="Text62">
+      <lang name="ru-RU">
+        Такого типа машины ({0}) не сцществует
       </lang>
       <lang name="en-US">
         Test
