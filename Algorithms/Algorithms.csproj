@@ -38,7 +38,12 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
@@ -49,6 +54,17 @@
       <Project>{f057d2e0-474d-4d49-be02-7ec4a0bbb465}</Project>
       <Name>libgameobject</Name>
     </ProjectReference>
+    <ProjectReference Include="..\libpathgraph\libpathgraph.csproj">
+      <Project>{f5cc9d3c-cdfc-4477-9455-f0d7c6fdb01b}</Project>
+      <Name>libpathgraph</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util\Util.csproj">
+      <Project>{d4b959ab-eef2-487b-8f0b-35d125e7f4a5}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

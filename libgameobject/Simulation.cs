@@ -190,7 +190,7 @@ namespace libgameobject
                         GameCycle(d);
                     }
                     OnUpdate?.Invoke();
-                    Thread.Sleep(50);
+                    Thread.Sleep(100);
                 }
                 catch(Exception ex)
                 {

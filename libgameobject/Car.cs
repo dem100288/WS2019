@@ -9,7 +9,7 @@ using Util;
 
 namespace libgameobject
 {
-    public enum CarStatus { Idle = 0, Run = 1, Broken = 2 };
+    public enum CarStatus { Idle = 0, Run = 1, Broken = 2 }
 
     public class Car: BaseCar
     {

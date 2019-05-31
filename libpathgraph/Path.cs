@@ -17,7 +17,7 @@ namespace libpathgraph
         public Node NodeEnd => nodeEnd;
         private List<LinkNode> Links;
         public List<LinkNode> ListLinks => Links;
-        private double Lenght => Links.Sum(x => x.Lenght);
+        public double Lenght => Links.Sum(x => x.Lenght);
 
         private Path()
         {

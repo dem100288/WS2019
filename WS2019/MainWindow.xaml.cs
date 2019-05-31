@@ -31,7 +31,6 @@ namespace WS2019
         public MainWindow()
         {
             InitializeComponent();
-            Algorithm.Init();
 
             Title = Util.Localization.GetText("Title");
             tabConsole.Header = Util.Localization.GetText("Text53");
@@ -92,6 +91,7 @@ namespace WS2019
                 Tools.Message(MessageStatus.Error, Util.Localization.GetText("Text61"));
             comboType.ItemsSource = Settings.ListTypeCar;
             comboType.DisplayMemberPath = "Name";
+            Algorithm.Init();
         }
 
         private void Simulation_OnMessageStat(string mes)
