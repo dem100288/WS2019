@@ -43,7 +43,8 @@ namespace WS2019
 
         private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            OnClickStation?.Invoke(station);
+            if (Settings.ControlCar)
+                OnClickStation?.Invoke(station);
         }
     }
 }

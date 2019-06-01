@@ -60,7 +60,8 @@ namespace WS2019
 
         private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            OnClickConteiner?.Invoke(container);
+            if(Settings.ControlCar)
+                OnClickConteiner?.Invoke(container);
         }
     }
 }

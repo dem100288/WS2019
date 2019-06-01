@@ -100,5 +100,12 @@ namespace libgameobject
             //if (k > porog)
                 Capacity += delta * FillRate;
         }
+
+        internal void Reset()
+        {
+            Capacity = fine = 0;
+            StatusInfo = new ContainerStatusInfo();
+            //throw new NotImplementedException();
+        }
     }
 }

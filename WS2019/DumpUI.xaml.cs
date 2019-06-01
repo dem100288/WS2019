@@ -43,7 +43,8 @@ namespace WS2019
 
         private void UserControl_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            OnClickDump?.Invoke(dump);
+            if (Settings.ControlCar)
+                OnClickDump?.Invoke(dump);
         }
     }
 }

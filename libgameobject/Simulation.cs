@@ -250,7 +250,7 @@ namespace libgameobject
             {
                 Cars.TryTake(out someItem);
             }
-            foreach (var c in Containers) c.StatusInfo = new ContainerStatusInfo();
+            foreach (var c in Containers) c.Reset();
             Tools.Message(MessageStatus.Info, Localization.GetText("Text14"));
             OnSimulationStop?.Invoke();
         }
