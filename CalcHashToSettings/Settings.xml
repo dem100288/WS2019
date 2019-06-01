@@ -1,4 +1,4 @@
-<settings hash="00000000000000000000" code="4">
+<settings hash="00000000000000000000" code="6">
   <variables>
     <!--Отображение панели управления машиной-->
     <var name="ControlCar" value="true"/>
