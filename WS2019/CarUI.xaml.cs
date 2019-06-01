@@ -30,6 +30,8 @@ namespace WS2019
 
             car = _car;
             progressCapacity.Maximum = car.Type.LimitCapacity;
+            progressFuel.Maximum = car.Type.MaxFuel;
+            progressWear.Maximum = Settings.LimitWearout;
             car.OnChangeStatus += Car_OnChangeStatus;
             car.OnChangeProperty += Car_OnChangeProperty;
             car.OnChangePosition += Car_OnChangePosition;

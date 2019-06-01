@@ -72,7 +72,9 @@ namespace libgameobject
                 timeMonth = value;
                 if (d > 0)
                 {
-                    ChangeCoinsDown(d * Cars.Count * Settings.MaintenanceCostsCar);
+                    foreach (Car c in Cars)
+                        //ChangeCoinsDown(d * Cars.Count * Settings.MaintenanceCostsCar);
+                        ChangeCoinsDown(c.Type.MaintenanceCostsCar);
                     foreach (Container c in Containers)
                         c.PayFine();
                     OnEndMonth?.Invoke();

@@ -11,7 +11,7 @@ namespace libgameobject
     public class BaseCar
     {
         protected Point position;
-        protected double fuel = Settings.FuelOfBuying; 
+        protected double fuel = 0; 
         protected double wearout = Settings.WearoutOfBuying;
         protected double capacity = 0;
         protected CarStatus status = CarStatus.Idle;

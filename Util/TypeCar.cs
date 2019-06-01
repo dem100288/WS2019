@@ -13,5 +13,11 @@ namespace Util
         public double CostCar { set; get; }
         public double LimitCapacity { set; get; }
         public string Image { set; get; }
+        public double FuelConsumption { set; get; }
+        public double MaxFuel { set; get; }
+        public double SpeedCar { set; get; }
+        public double FuelOfBuying { set; get; }
+        public double MaintenanceCostsCar { set; get; }
+        public double CostRepairs { set; get; }
     }
 }

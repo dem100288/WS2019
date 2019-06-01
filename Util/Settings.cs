@@ -15,9 +15,9 @@ namespace Util
 
         public static List<TypeCar> ListTypeCar { set; get; }
 
-        public static double CostRepairs { set; get; } = 0.1;
+        //public static double CostRepairs { set; get; } = 0.1;
         public static double CostFuel { set; get; } = 0.1;
-        public static double MaxFuel { set; get; } = 100;
+        //public static double MaxFuel { set; get; } = 100;
         public static double CostReturn { set; get; } = 10;
         public static double LimitWearout { set; get; } = 100;
         public static string ImageMap { set; get; } = "";
@@ -42,9 +42,9 @@ namespace Util
         public static double MaxSimulationSpeed { set; get; } = 100;
         public static double DefaultSimulationSpeed { set; get; } = 10;
         public static double TickPerSecond { set; get; } = 10000000;
-        public static double SpeedCar { set; get; } = 50;
-        public static double FuelOfBuying { set; get; } = 100;
-        public static double FuelConsumption { set; get; } = 0.1;
+        //public static double SpeedCar { set; get; } = 50;
+        //public static double FuelOfBuying { set; get; } = 100;
+        //public static double FuelConsumption { set; get; } = 0.1;
         public static double WearoutOfBuying { set; get; } = 0;
         public static double ProbabilityOfWear { set; get; } = 0.5;
         public static double WearoutEffectOnSpeed { set; get; } = 0.1;
@@ -56,7 +56,7 @@ namespace Util
         public static int MaxKContainer { get; set; } = 150;
         public static double KFine { set; get; } = 0.01;
         public static double CostTrash { set; get; } = 1;
-        public static double MaintenanceCostsCar { set; get; } = 50;
+        //public static double MaintenanceCostsCar { set; get; } = 50;
         public static double SecondPerHour { set; get; } = 1;
         public static bool ControlCar { set; get; } = true;
         public static double MonthTest { set; get; } = 10;
@@ -77,6 +77,12 @@ namespace Util
                         Id = int.Parse(t.Attribute("id").Value),
                         Name = t.Attribute("name").Value,
                         CostCar = double.Parse(t.Attribute("CostCar").Value.Replace(SeparatorInFile, separator)),
+                        FuelConsumption = double.Parse(t.Attribute("FuelConsumption").Value.Replace(SeparatorInFile, separator)),
+                        MaxFuel = double.Parse(t.Attribute("MaxFuel").Value.Replace(SeparatorInFile, separator)),
+                        SpeedCar = double.Parse(t.Attribute("SpeedCar").Value.Replace(SeparatorInFile, separator)),
+                        FuelOfBuying = double.Parse(t.Attribute("FuelOfBuying").Value.Replace(SeparatorInFile, separator)),
+                        MaintenanceCostsCar = double.Parse(t.Attribute("MaintenanceCostsCar").Value.Replace(SeparatorInFile, separator)),
+                        CostRepairs = double.Parse(t.Attribute("CostRepairs").Value.Replace(SeparatorInFile, separator)),
                         LimitCapacity = double.Parse(t.Attribute("LimitCapacityCar").Value.Replace(SeparatorInFile, separator)),
                         Image = t.Attribute("image").Value
                     });
@@ -99,9 +105,9 @@ namespace Util
             var separator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
             switch(name)
             {
-                case "CostRepairs": { CostRepairs = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
+                //case "CostRepairs": { CostRepairs = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "CostFuel": { CostFuel = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
-                case "MaxFuel": { MaxFuel = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
+                //case "MaxFuel": { MaxFuel = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "CostReturn": { CostReturn = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "LimitWearout": { LimitWearout = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "map": { ImageMap = value; break; }
@@ -126,9 +132,9 @@ namespace Util
                 case "MaxSimulationSpeed": { MaxSimulationSpeed = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "DefaultSimulationSpeed": { DefaultSimulationSpeed = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "TickPerSecond": { TickPerSecond = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
-                case "SpeedCar": { SpeedCar = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
-                case "FuelOfBuying": { FuelOfBuying = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
-                case "FuelConsumption": { FuelConsumption = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
+                //case "SpeedCar": { SpeedCar = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
+                //case "FuelOfBuying": { FuelOfBuying = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
+                //case "FuelConsumption": { FuelConsumption = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "WearoutOfBuying": { WearoutOfBuying = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "ProbabilityOfWear": { ProbabilityOfWear = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "WearoutEffectOnSpeed": { WearoutEffectOnSpeed = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
@@ -140,7 +146,7 @@ namespace Util
                 case "MaxKContainer": { MaxKContainer = int.Parse(value); break; }
                 case "KFine": { KFine = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "CostTrash": { CostTrash = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
-                case "MaintenanceCostsCar": { MaintenanceCostsCar = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
+                //case "MaintenanceCostsCar": { MaintenanceCostsCar = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "SecondPerHour": { SecondPerHour = double.Parse(value.Replace(SeparatorInFile, separator)); break; }
                 case "ControlCar": { ControlCar = bool.Parse(value); break; }
                 case "MonthTest": { MonthTest = double.Parse(value.Replace(SeparatorInFile, separator)); break; }

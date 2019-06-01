@@ -41,7 +41,7 @@ namespace WS2019
             //imageBack.Source = new BitmapImage(new Uri(Settings.ImageBack, UriKind.Relative));
             imageWrench.Source = new BitmapImage(new Uri(Settings.ImageWrench, UriKind.Relative));
             imageCap.Source = new BitmapImage(new Uri(Settings.ImageCarCap, UriKind.Relative));
-            textFuelMax.Text = Settings.MaxFuel.ToString();
+            textFuelMax.Text = car.Type.MaxFuel.ToString();
             textCapMax.Text = car.Type.LimitCapacity.ToString();
             if (Settings.ControlCar)
             {

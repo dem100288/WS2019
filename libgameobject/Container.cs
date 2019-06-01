@@ -84,9 +84,12 @@ namespace libgameobject
 
         public void PayFine()
         {
-            StatusInfo.l2.Add(Fine);
-            OnFine?.Invoke(this, Math.Round(Fine,2));
-            fine = 0;
+            if (Fine > 0)
+            {
+                StatusInfo.l2.Add(Fine);
+                OnFine?.Invoke(this, Math.Round(Fine, 2));
+                fine = 0;
+            }
         }
 
         public void GameCicle(double delta)

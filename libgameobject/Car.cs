@@ -80,9 +80,9 @@ namespace libgameobject
 
             set
             {
-                var probability = Tools.rand.NextDouble();
-                if (probability <= Settings.ProbabilityOfWear)
-                    wearout = value;
+                //var probability = Tools.rand.NextDouble();
+                //if (probability <= Settings.ProbabilityOfWear)
+                //    wearout = value;
                 if (wearout >= Settings.LimitWearout)
                 {
                     wearout = Settings.LimitWearout;
@@ -132,6 +132,7 @@ namespace libgameobject
         public Car(TypeCar type)
         {
             Type = type;
+            fuel = Type.FuelOfBuying;
             StatusInfo = new CarStatusInfo(this);
             Position = Simulation.FindStationById(1).Point.Coordinate;
             Tools.OnChangeScale += Tools_OnChangeScale;
@@ -146,7 +147,9 @@ namespace libgameobject
         {
             if (!Simulation.SimulationRun)
             {
-                Fuel = Settings.MaxFuel;
+                Fuel = Type.FuelOfBuying;
+                Wearout = Settings.WearoutOfBuying;
+                Capacity = 0;
             }
         }
 
@@ -156,9 +159,9 @@ namespace libgameobject
             if (st != null)
             {
                 double w = 0;
-                if (Simulation.Coins > Wearout * Settings.CostRepairs)
+                if (Simulation.Coins > Wearout * Type.CostRepairs)
                 {
-                    Simulation.ChangeCoinsDown(Wearout * Settings.CostRepairs);
+                    Simulation.ChangeCoinsDown(Wearout * Type.CostRepairs);
                     w = wearout;
                     wearout = 0;
                     OnChangeProperty?.Invoke(this);
@@ -167,8 +170,8 @@ namespace libgameobject
                 {
                     if (Simulation.Coins > 0)
                     {
-                        w = Simulation.Coins / Settings.CostRepairs;
-                        wearout -= Simulation.Coins / Settings.CostRepairs;
+                        w = Simulation.Coins / Type.CostRepairs;
+                        wearout -= Simulation.Coins / Type.CostRepairs;
                         OnChangeProperty?.Invoke(this);
                         Simulation.ChangeCoinsDown(Simulation.Coins);
                     }
@@ -201,11 +204,11 @@ namespace libgameobject
             if (st != null)
             {
                 double f = 0;
-                if (Simulation.Coins > (Settings.MaxFuel - Fuel) * Settings.CostFuel)
+                if (Simulation.Coins > (Type.MaxFuel - Fuel) * Settings.CostFuel)
                 {
-                    Simulation.ChangeCoinsDown((Settings.MaxFuel - Fuel) * Settings.CostFuel);
-                    f = Settings.MaxFuel - Fuel;
-                    Fuel = Settings.MaxFuel;
+                    Simulation.ChangeCoinsDown((Type.MaxFuel - Fuel) * Settings.CostFuel);
+                    f = Type.MaxFuel - Fuel;
+                    Fuel = Type.MaxFuel;
                     
                 }
                 else
@@ -342,11 +345,11 @@ namespace libgameobject
             if ((Status == CarStatus.Run))
             {
                 StatusInfo.t1 += delta;
-                var pos = currentPath?.NextStep(Position, delta * Settings.SpeedCar * Settings.WearoutEffectOnSpeed) ?? Position;
+                var pos = currentPath?.NextStep(Position, delta * Type.SpeedCar) ?? Position;
                 double len = Position.Lenght(pos);
                 StatusInfo.t2 += len;
                 Position = pos;
-                Fuel -= len * Settings.FuelConsumption;
+                Fuel -= len * Type.FuelConsumption;
                 Wearout += len * Settings.WearRate;
             }
         }

@@ -64,33 +64,33 @@
     
     <!--Настройка машин-->
     <!--Стоимость починки машины-->
-    <var name="CostRepairs" value="300"/>
+    <!--<var name="CostRepairs" value="300"/>-->
     <!--Стоимость заправки топливом, монет за литр-->
     <var name="CostFuel" value="0.42"/>
     <!--Максимальное значение топлива машины, литры-->
-    <var name="MaxFuel" value="200"/>
+    <!--<var name="MaxFuel" value="200"/>-->
     <!--Стоимость возврата машины на станцию-->
     <var name="CostReturn" value="50"/>
     <!--Максимальное значение износа машины-->
     <var name="LimitWearout" value="100"/>
     <!--скорость (коэффициент изменения положения машины в зависимости от прошедшего времени за игровой цикл)-->
-    <var name="SpeedCar" value="10000"/>
+    <!--<var name="SpeedCar" value="10000"/>-->
     <!--количество топлива в машине при покупке, литры -->
-    <var name="FuelOfBuying" value="200"/>
+    <!--<var name="FuelOfBuying" value="200"/>-->
     <!--коэффициент уменьшения топлива когда машина двигается за время игрового цикла, л/уед (1 км = 222 уед; 100 км = 22200 уед; 27л/100км = 27 л/22200уед = 0,0012 л/уед)-->
-    <var name="FuelConsumption" value="0.0012"/>
+    <!--<var name="FuelConsumption" value="0.0012"/>-->
     <!--показатель износа при покупке машины-->
     <var name="WearoutOfBuying" value="0"/>
-    <!--вероятность увеличения износа во время движения машины-->
+    <!--!!!НЕ УЧИТЫВАЕТСЯ!!!вероятность увеличения износа во время движения машины-->
     <var name="ProbabilityOfWear" value="0.5"/>
-    <!--коэффициент влияния износа на скорость движения-->
+    <!--!!!НЕ УЧИТЫВАЕТСЯ!!!коэффициент влияния износа на скорость движения-->
     <var name="WearoutEffectOnSpeed" value="0.1"/>
     <!--коэффициент увеличения износа когда машина двигается за время игрового цикла-->
     <var name="WearRate" value="0.05"/>
     <!--Максимальное значение вместимости машины, кг-->
     <!--<var name="LimitCapacityCar" value="9600"/>-->
     <!--Издержки на содержание (з/п водителю, ежемесячный техосмотр), монет-->
-    <var name="MaintenanceCostsCar" value="500"/>
+    <!--<var name="MaintenanceCostsCar" value="500"/>-->
     
     <!--Настройки контейнера-->
     <!--Вместимость контейнера, кг-->
@@ -108,10 +108,21 @@
     <!---->
 
   </variables>
+  <!--id - Идентификатор типа машины-->
+  <!--name - Наименование типа машины-->
+  <!--LimitCapacityCar - Максимальное значение вместимости машины, кг-->
+  <!--CostCar - Стоимость покупки машины, монет-->
+  <!--FuelConsumption - Коэффициент уменьшения топлива когда машина двигается за время игрового цикла, л/уед (1 км = 222 уед; 100 км = 22200 уед; 27л/100км = 27 л/22200уед = 0,0012 л/уед)-->
+  <!--MaxFuel - Максимальное значение топлива машины, литры-->
+  <!--SpeedCar - скорость (коэффициент изменения положения машины в зависимости от прошедшего времени за игровой цикл)-->
+  <!--FuelOfBuying - количество топлива в машине при покупке, литры -->
+  <!--MaintenanceCostsCar - Издержки на содержание (з/п водителю, ежемесячный техосмотр), монет-->
+  <!--CostRepairs - Стоимость починки машины-->
+  <!--image - Изображение машины-->
   <typecar>
-    <type id="1" name="type1" LimitCapacityCar="9600" CostCar="50" image="Images/car.png"/>
-    <type id="2" name="type2" LimitCapacityCar="19200" CostCar="100" image="Images/car.png"/>
-    <type id="3" name="type3" LimitCapacityCar="38400" CostCar="200" image="Images/car.png"/>
+    <type id="1" name="type1" LimitCapacityCar="9600" CostCar="50" FuelConsumption="0.0012" MaxFuel="200" FuelOfBuying="200" SpeedCar="10000" MaintenanceCostsCar="500" CostRepairs="300" image="Images/car.png"/>
+    <type id="2" name="type2" LimitCapacityCar="19200" CostCar="100" FuelConsumption="0.0012" MaxFuel="200" FuelOfBuying="200" SpeedCar="10000" MaintenanceCostsCar="500" CostRepairs="300" image="Images/car.png"/>
+    <type id="3" name="type3" LimitCapacityCar="38400" CostCar="200" FuelConsumption="0.0012" MaxFuel="200" FuelOfBuying="200" SpeedCar="10000" MaintenanceCostsCar="500" CostRepairs="300" image="Images/car.png"/>
   </typecar>
   <local default="ru-RU">
     <text name="Title">

@@ -178,7 +178,8 @@ namespace WS2019
                 Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new EventDelegate(delegate ()
                 {
                     canpath.Children.Clear();
-                    foreach (var p in Simulation.Graph.ListPath)
+                    var listp = Simulation.Graph.ListPath.ToList();
+                    foreach (var p in listp)
                     {
                         foreach (var ln in p.ListLinks)
                         {
