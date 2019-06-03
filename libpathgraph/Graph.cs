@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Windows;
+using Newtonsoft.Json.Linq;
 
 namespace libpathgraph
 {
@@ -26,6 +27,25 @@ namespace libpathgraph
         public void Draw()
         {
 
+        }
+
+        public string GetListNodes()
+        {
+            JObject json = new JObject();
+            JArray nodes = new JArray();
+            foreach(var n in ListNode)
+            {
+                JObject o = new JObject();
+                o.Add("id",n.id);
+                o.Add("x", n.Coordinate.X);
+                o.Add("y", n.Coordinate.Y);
+                o.Add("in", new JArray(n.InLinks.Select(x => new JObject(new JProperty("id", x.NodeStart.id))))) ;
+                o.Add("out", new JArray(n.OutLinks.Select(x => new JObject(new JProperty("id", x.NodeEnd.id)))));
+                nodes.Add(o);
+            }
+            json["nodes"] = nodes;
+            string ret = json.ToString();
+            return ret;
         }
 
         public Path NewPath(Node start, Node end)

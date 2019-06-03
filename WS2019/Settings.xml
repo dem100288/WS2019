@@ -7,7 +7,7 @@
     <!--Тип машины по умолчанию, когда он не указан при покупке-->
     <var name="DefaultTypeByCar" value="1"/>
     <!--Сервер для подключения-->
-    <var name="Server" value="http://sev-tworx/Thingworx"/>
+    <var name="Server" value="http://sev-tworx/Thingworx/"/>
     <!--Ключ-->
     <var name="AppKey" value="59db5764-ff23-40ed-8b73-b35d7ccb8d30"/>
     <!--Настройки для изображений-->
