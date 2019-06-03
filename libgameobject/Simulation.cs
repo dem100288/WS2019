@@ -437,6 +437,7 @@ namespace libgameobject
                     throw new Exception(Localization.GetText("Text44"));
                 }
             }
+            ConnectionToServer.SendJson(Graph.GetListNodes(),"Simulation","LoadNodes");
         }
 
         private static void dfs(Node node) {
