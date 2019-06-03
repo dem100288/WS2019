@@ -8,16 +8,15 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
         <StackPanel Orientation="Horizontal">
-            <TextBlock Name="textnum" Text="num"/>
-            <TextBlock Name="textId"/>
+            <TextBlock Name="textnum" Text="num" Width="0"/>
+            <TextBlock Name="textId" Text="1" FontSize="20" VerticalAlignment="Center" Margin="25,0,0,0" Foreground="White" HorizontalAlignment="Right" TextAlignment="Right"/>
+            <Image x:Name="imageCap" Source="Images/cont.png" Width="28" Height="28" Margin="5,0,0,0"/>
+            <TextBlock x:Name="textCap" Text="000/100" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Margin="6,0,0,0" Foreground="#FF7E7E7E"/>
+            <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                <TextBlock x:Name="textfine" Text="Штраф" VerticalAlignment="Center" Margin="0" FontSize="14" Foreground="#FFBB6B6B"/>
+                <TextBlock x:Name="textFine" Foreground="{Binding Foreground, ElementName=textfine}" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="11,0,0,0" FontWeight="Bold"/>
+            </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Image Name="imageCap"/>
-            <TextBlock Name="textCap"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Name="textfine" Text="Штраф"/>
-            <TextBlock Name="textFine"/>
-        </StackPanel>
+        <Rectangle Fill="#FF6E6E6E" Height="1" Margin="0,2,0,0"/>
     </StackPanel>
 </UserControl>

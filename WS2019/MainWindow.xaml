@@ -14,43 +14,30 @@
             <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="250"/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="320"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Column="1">
-            <Button Click="Button_Click_3" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Name="imageStartStop" Stretch="Fill"/>
+            <Button Click="Button_Click_3" Width="36" Height="36" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="17,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Image Name="imageStartStop" Stretch="Fill" Source="Images/start.png" Width="32" Height="32"/>
             </Button>
-            <StackPanel MinWidth="200">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Name="imageCoins" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Height="20"/>
-                <TextBlock Name="textCoins"/>
+            <StackPanel MinWidth="200" Margin="13,0,0,0" Orientation="Horizontal">
+                <TextBlock x:Name="textTime" Text="2 месяца 12 дней 5 часов" FontSize="24" Margin="0" VerticalAlignment="Center"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Name="textTime"/>
-            </StackPanel>
-            </StackPanel>
-            <StackPanel>
-                <TextBlock Name="textScale" Text="scale"/>
+            <StackPanel Margin="20,0,0,0">
+                <TextBlock Name="textScale" Text="Масштаб" Margin="0,6,0,0"/>
                 <Slider Name="ScaleObject" MinWidth="100" Maximum="5" TickFrequency="0.1" Value="1" LargeChange="0.1" ValueChanged="ScaleObject_ValueChanged" Minimum="0.5"/>
             </StackPanel>
-            <StackPanel>
-                <TextBlock Name="textSpeed" Text="speed"/>
+            <StackPanel Margin="10,0,0,0">
+                <TextBlock Name="textSpeed" Text="Скорость симуляции" Margin="0,6,0,0"/>
                 <Slider Name="Speed" MinWidth="100" Maximum="100" TickFrequency="0.01" Value="10" LargeChange="0.01" ValueChanged="Speed_ValueChanged"  Minimum="1" SmallChange="0.01"/>
             </StackPanel>
-            <StackPanel Name="BtnAddCar" Orientation="Horizontal">
-            <Button Content="Add car" Click="Button_Click" RenderTransformOrigin="0.5,0.5" Height="50" VerticalAlignment="Top"/>
-            <StackPanel>
-                <TextBlock Text="Тип машины"/>
-                <ComboBox Name="comboType"/>
-            </StackPanel>
-            </StackPanel>
         </StackPanel>
-        <GridSplitter Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Background="#FFBFBEBE"/>
-        <TabControl Name="tabs" Grid.Row="3" Grid.ColumnSpan="3">
-            
-            
+        <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" Background="#FFBFBEBE" Grid.Column="1"/>
+        <TabControl Name="tabs" Grid.Row="3" Grid.Column="1">
+
+
             <TabItem Name="tabConsole" Header="cons">
                 <ListView Name="console" IsTextSearchEnabled="False"/>
             </TabItem>
@@ -60,7 +47,7 @@
                     <ListView Name="stat" />
                 </DockPanel>
             </TabItem>
-            
+
         </TabControl>
         <Grid Name="maingrid" Grid.Column="1" Grid.Row="1">
             <Image Name="imageMap" Stretch="Fill" SizeChanged="imageMap_SizeChanged"/>
@@ -69,15 +56,29 @@
             <Canvas Name="canobject"/>
             <Canvas Name="canCar"/>
         </Grid>
-        <ListView Name="panelCar" Grid.Column="2" Grid.Row="0" Grid.RowSpan="2">
-           
+        <ListView Name="panelCar" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="White">
+            <Canvas Height="100" Width="100"/>
+
         </ListView>
-        <ScrollViewer Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
+        <ScrollViewer Grid.Column="0" Grid.RowSpan="4" Background="#FF333337">
             <StackPanel Name="panelCont">
 
             </StackPanel>
 
         </ScrollViewer>
+        <StackPanel x:Name="StackPanelAddCar" Grid.Column="2" Orientation="Horizontal" Background="White">
+            <StackPanel x:Name="StackPanelCarType" Width="191" Margin="13,0">
+                <TextBlock Text="Тип машины"/>
+                <ComboBox x:Name="comboType"/>
+            </StackPanel>
+            <StackPanel x:Name="BtnAddCar" Orientation="Horizontal">
+                <Button Content="Add car" Click="Button_Click" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="7,1" UseLayoutRounding="False" Height="40"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="3" Orientation="Horizontal">
+            <Image x:Name="imageCoins" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,0,0" RenderTransformOrigin="0.5,0.5" Width="64" Height="64"/>
+            <TextBlock x:Name="textCoins" Text="85000" FontSize="36" FontWeight="Bold" VerticalAlignment="Center" Margin="4,0,0,0" Foreground="#FF3F4A54"/>
+        </StackPanel>
 
 
     </Grid>
