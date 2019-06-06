@@ -39,9 +39,9 @@ namespace WS2019
             textScale.Text = Util.Localization.GetText("Text56");
             textSpeed.Text = Util.Localization.GetText("Text57");
             if (Settings.ControlCar)
-                BtnAddCar.Visibility = Visibility.Visible;
+                StackPanelAddCar.Visibility = Visibility.Visible;
             else
-                BtnAddCar.Visibility = Visibility.Collapsed;
+                StackPanelAddCar.Visibility = Visibility.Collapsed;
 
             Simulation.OnCreateCar += Simulation_OnCreateCar;
             Simulation.OnCreateContainer += Simulation_OnCreateContainer;
@@ -85,10 +85,7 @@ namespace WS2019
             Speed.Maximum = Settings.MaxSimulationSpeed;
             Speed.Value = Settings.DefaultSimulationSpeed;
             Simulation_OnTimeChange();
-            //if (ConnectionToServer.TestConnectToServer())
-            //    Tools.Message(MessageStatus.Info, Util.Localization.GetText("Text60"));
-            //else
-            //    Tools.Message(MessageStatus.Error, Util.Localization.GetText("Text61"));
+            
             comboType.ItemsSource = Settings.ListTypeCar;
             comboType.DisplayMemberPath = "Name";
         }
@@ -107,7 +104,7 @@ namespace WS2019
             if (!Dispatcher.HasShutdownStarted)
                 Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new EventDelegate(delegate ()
                 {
-                    textTime.Text = string.Format(Util.Localization.GetText("Text58"), Simulation.TimeMonth, Simulation.TimeDay, Simulation.TimeHour);
+                    textTime.Text = string.Format(Util.Localization.GetText("Text58"), Simulation.TimeMonth.ToString().PadLeft(2,'0'), Simulation.TimeDay.ToString().PadLeft(2, '0'), Simulation.TimeHour.ToString().PadLeft(2, '0'));
                 }));
         }
 
@@ -327,6 +324,17 @@ namespace WS2019
                 }
             }
             sfd.Dispose();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            //ConnectionToServer.Test();
+            ConnectionToServer.SendChangeCoins(50);
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            ConnectionToServer.SendSimulationStatus(true);
         }
 
         private void imageMap_SizeChanged(object sender, SizeChangedEventArgs e)

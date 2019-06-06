@@ -39,7 +39,7 @@ namespace Util
         public static void Message(MessageStatus status, string message, bool sendtoserver = false)
         {
             if (sendtoserver)
-                ConnectionToServer.SendDataToServer("send messgae");
+                ConnectionToServer.SendMessageToServer(status, message);
             OnNewMessage?.Invoke(status, message);
         }
 

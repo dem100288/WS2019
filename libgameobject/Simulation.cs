@@ -10,6 +10,7 @@ using System.Windows;
 using System.Threading;
 using System.Diagnostics;
 using Util;
+using Newtonsoft.Json.Linq;
 
 namespace libgameobject
 {
@@ -95,18 +96,69 @@ namespace libgameobject
             set
             {
                 timeDay = value;
-                int d = (int)(timeDay / 30d);
-                if (d > 0)
+                int m = (int)(timeDay / 30d);
+                if (m > 0)
                 {
-                    TimeMonth += d;
+                    TimeMonth += m;
+                    
                     timeDay = timeDay % 30d;
                 }
+                string res = ConnectionToServer.SendJson(GetConteinerInfo(), "Simulation", "DayEnd");
+                ParseJson(res);
             }
             get
             {
                 return timeDay;
             }
         }
+
+        private static void ParseJson(string str)
+        {
+            if (str != "")
+            {
+                JObject json = JObject.Parse(str);
+                var rows = (JArray)json.Property("rows").Value;
+                foreach(var com in rows)
+                {
+                    string command = (com as JObject).Property("Command").Value.ToString();
+                    switch(command.Split(' ')[0])
+                    {
+                        case "BuyCar":
+                            {
+                                BuyCar(int.Parse(command.Split(' ')[1]));
+                                break;
+                            }
+                        default:
+                            {
+                                Tools.Message(MessageStatus.Error, "Error command: " + command, true);
+                                break;
+                            } 
+                    }
+                }
+            }
+        }
+
+        private static string GetConteinerInfo()
+        {
+            JObject json = new JObject();
+            JArray conts = new JArray();
+            foreach (var c in Containers)
+            {
+                JObject o = new JObject();
+                o.Add("id", c.Id);
+                o.Add("crowded", c.Repletion);
+                o.Add("fill", c.Capacity);
+                o.Add("fine", c.Fine);
+                conts.Add(o);
+            }
+            json["conts"] = conts;
+            json["hour"] = Convert.ToInt32(TimeHour);
+            json["day"] = Convert.ToInt32(TimeDay);
+            json["month"] = Convert.ToInt32(TimeMonth);
+            return json.ToString();
+            //throw new NotImplementedException();
+        }
+
         public static double TimeHour
         {
             set
@@ -119,6 +171,7 @@ namespace libgameobject
                     timeHour = timeHour % 24d;
                 }
                 OnTimeChange?.Invoke();
+                GetCarAction();
             }
             get
             {
@@ -161,6 +214,58 @@ namespace libgameobject
             get
             {
                 return simulationRun;
+            }
+        }
+
+        private static void GetCarAction()
+        {
+            foreach(var car in Cars.Where(x => x.Status == CarStatus.Idle))
+            {
+                var act = ConnectionToServer.GetCarAction(car.Id);
+                if (act != null)
+                {
+                    JObject a = JObject.Parse(act);
+                    if (a.Properties().Count() > 0)
+                    {
+                        string com = a.Property("command").Value.ToString();
+                        switch (com.Split(' ')[0])
+                        {
+                            case "Run":
+                                {
+                                    Node n = Graph.FindNodeById(int.Parse(com.Split(' ')[1]));
+                                    if (n != null)
+                                    {
+                                        car.Run(n);
+                                    }
+                                    else
+                                    {
+                                        Tools.Message(MessageStatus.Error, "Error node id in command: " + com, true);
+                                    }
+                                    break;
+                                }
+                            case "Fueling":
+                                {
+                                    car.Refueling();
+                                    break;
+                                }
+                            case "Repair":
+                                {
+                                    car.Repair();
+                                    break;
+                                }
+                            case "Return":
+                                {
+                                    car.Return();
+                                    break;
+                                }
+                            default:
+                                {
+                                    Tools.Message(MessageStatus.Error, "Error command: " + com, true);
+                                    break;
+                                }
+                        }
+                    }
+                }
             }
         }
 
@@ -220,24 +325,23 @@ namespace libgameobject
                 //Util.ConnectionToServer.SendDataToServer("Start simulation");
                 Statistic = new SimulationInfo();
                 Coins = 0;
+                Util.ConnectionToServer.SendSimulationStatus(SimulationRun);
+                ChangeCoinsUp(Settings.StartCoins);
                 PastTime = TimeHour = TimeDay = TimeMonth = 0;
                 GameThread?.Abort();
                 GameThread = new Thread(GameThreadFunc);
                 GameThread.Priority = ThreadPriority.Lowest;
                 GameThread.Start();
-                Util.ConnectionToServer.SendDataToServer("Start simulation");
+                
                 OnSimulationStart?.Invoke();
                 Tools.Message(MessageStatus.Info, Localization.GetText("Text13"));
-                ChangeCoinsUp(Settings.StartCoins);
-                
-                
             }
             
         }
 
         private static void StopSimulation()
         {
-            Util.ConnectionToServer.SendDataToServer("Stop simulation");
+            Util.ConnectionToServer.SendSimulationStatus(SimulationRun);
 
             //GameTimer = null;
 
@@ -313,6 +417,7 @@ namespace libgameobject
             {
                 Coins += _coins;
                 Statistic.t1 += _coins;
+                ConnectionToServer.SendChangeCoins(_coins);
                 Tools.Message(MessageStatus.Info, string.Format(Localization.GetText("Text40"), Math.Round(_coins, 2)));
             }
         }
@@ -323,6 +428,7 @@ namespace libgameobject
             {
                 Coins -= _coins;
                 Statistic.t2 += _coins;
+                ConnectionToServer.SendChangeCoins(-_coins);
                 Tools.Message(MessageStatus.Info, string.Format(Localization.GetText("Text41"), Math.Round(_coins, 2)));
             }
         }
@@ -345,7 +451,17 @@ namespace libgameobject
             ChangeCoinsDown(type.CostCar);
             Cars.Add(car);
             OnCreateCar?.Invoke(car);
-            Util.ConnectionToServer.SendDataToServer("Add car");
+            JObject newcar = new JObject();
+            newcar["id"] = car.Id;
+            newcar["type"] = car.Type.Id;
+            newcar["x"] = car.Position.X;
+            newcar["y"] = car.Position.Y;
+            newcar["fuel"] = car.Fuel;
+            newcar["wearout"] = car.Wearout;
+            newcar["load"] = car.Capacity;
+            newcar["status"] = car.GetIdStatus();
+            ConnectionToServer.SendAddCar(newcar.ToString());
+            //Util.ConnectionToServer.SendDataToServer("Add car");
         }
 
         public static Station FindStationById(int id)
@@ -437,7 +553,61 @@ namespace libgameobject
                     throw new Exception(Localization.GetText("Text44"));
                 }
             }
+            //ConnectionToServer.TestConnectToServer();
             ConnectionToServer.SendJson(Graph.GetListNodes(),"Simulation","LoadNodes");
+            ConnectionToServer.SendJson(GetSettings(), "Simulation", "LoadSettings");
+        }
+
+        private static string GetSettings()
+        {
+            JObject json = new JObject();
+            JArray stations = new JArray();
+            foreach (var s in Stations)
+            {
+                JObject o = new JObject();
+                o.Add("id", s.Id);
+                o.Add("node", s.Point.id);
+                stations.Add(o);
+            }
+            json["stations"] = stations;
+            JArray dumps = new JArray();
+            foreach (var d in Dumps)
+            {
+                JObject o = new JObject();
+                o.Add("id", d.Id);
+                o.Add("node", d.Point.id);
+                dumps.Add(o);
+            }
+            json["dumps"] = dumps;
+            JArray conts = new JArray();
+            foreach (var c in Containers)
+            {
+                JObject o = new JObject();
+                o.Add("id", c.Id);
+                o.Add("node", c.Point.id);
+                conts.Add(o);
+            }
+            json["conts"] = conts;
+            JArray types = new JArray();
+            foreach (var t in Settings.ListTypeCar)
+            {
+                JObject o = new JObject();
+                o.Add("id", t.Id);
+                o.Add("name", t.Name);
+                o.Add("limitcapacitycar", t.LimitCapacity);
+                o.Add("costcar", t.CostCar);
+                o.Add("maxfuel", t.MaxFuel);
+                o.Add("maintenancecostsvar", t.MaintenanceCostsCar);
+                o.Add("costrepairs", t.CostRepairs);
+                types.Add(o);
+            }
+            json["types"] = types;
+            json["costfuel"] = Settings.CostFuel;
+            json["costtrash"] = Settings.CostTrash;
+            json["limitcapacitycontainer"] = Settings.LimitCapacityContainer;
+            json["limitwearout"] = Settings.LimitWearout;
+            string ret = json.ToString();
+            return ret;
         }
 
         private static void dfs(Node node) {

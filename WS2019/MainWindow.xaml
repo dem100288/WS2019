@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WS2019"
         mc:Ignorable="d"
-        Title="MainWindow" Height="840" Width="1200" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
+        Title="MainWindow" Height="840" Width="1200" WindowStartupLocation="CenterScreen" Closing="Window_Closing" SizeToContent="Width" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -57,7 +57,7 @@
             <Canvas Name="canCar"/>
         </Grid>
         <ListView Name="panelCar" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="White">
-            <Canvas Height="100" Width="100"/>
+            <!--<Canvas Height="100" Width="100"/>-->
 
         </ListView>
         <ScrollViewer Grid.Column="0" Grid.RowSpan="4" Background="#FF333337">
@@ -72,7 +72,7 @@
                 <ComboBox x:Name="comboType"/>
             </StackPanel>
             <StackPanel x:Name="BtnAddCar" Orientation="Horizontal">
-                <Button Content="Add car" Click="Button_Click" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="7,1" UseLayoutRounding="False" Height="40"/>
+                <Button Content="Add car" Click="Button_Click" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Padding="7,1" UseLayoutRounding="False" Height="40" Margin="0,0,0,5"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="2" Grid.Row="3" Orientation="Horizontal">

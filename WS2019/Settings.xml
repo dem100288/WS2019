@@ -1,4 +1,4 @@
-<settings hash="00000000000000000000" code="4">
+﻿<settings hash="00000000000000000000" code="4">
   <variables>
     <!--Отображение панели управления машиной-->
     <var name="ControlCar" value="true"/>
@@ -47,7 +47,7 @@
     
     <!--Настройки симуляции-->
     <!--Количество монет в начале симулюции (1 монета = 100 рублей)-->
-    <var name="StartCoins" value="85000"/>
+    <var name="StartCoins" value="300000"/>
     <!--Стоимость покупки машины, монет-->
     <!--<var name="CostCar" value="42500"/>-->
     <!--Минимальное значение, может быть дробным-->
@@ -61,7 +61,7 @@
     <!--Количество секуд симуляции в игровом часе-->
     <var name="SecondPerHour" value="1"/>
     <!--Стоимость вывоза единицы мусора, монет)-->
-    <var name="CostTrash" value="2.5"/>
+    <var name="CostTrash" value="7.5"/>
     <!---->
     
     <!--Настройка машин-->
@@ -80,7 +80,7 @@
     <!--количество топлива в машине при покупке, литры -->
     <!--<var name="FuelOfBuying" value="200"/>-->
     <!--коэффициент уменьшения топлива когда машина двигается за время игрового цикла, л/уед (1 км = 222 уед; 100 км = 22200 уед; 27л/100км = 27 л/22200уед = 0,0012 л/уед)-->
-    <!--<var name="FuelConsumption" value="0.0012"/>-->
+    <!--<var name="FuelConsumption" value="0.012"/>-->
     <!--показатель износа при покупке машины-->
     <var name="WearoutOfBuying" value="0"/>
     <!--!!!НЕ УЧИТЫВАЕТСЯ!!!вероятность увеличения износа во время движения машины-->
@@ -88,7 +88,7 @@
     <!--!!!НЕ УЧИТЫВАЕТСЯ!!!коэффициент влияния износа на скорость движения-->
     <var name="WearoutEffectOnSpeed" value="0.1"/>
     <!--коэффициент увеличения износа когда машина двигается за время игрового цикла-->
-    <var name="WearRate" value="0.05"/>
+    <var name="WearRate" value="0.001"/>
     <!--Максимальное значение вместимости машины, кг-->
     <!--<var name="LimitCapacityCar" value="9600"/>-->
     <!--Издержки на содержание (з/п водителю, ежемесячный техосмотр), монет-->
@@ -104,7 +104,7 @@
     <!--Максимальный порог случайного коэфициента-->
     <var name="MaxKContainer" value="150"/>
     <!--Коэффициент увеличения штрафа за игровой цикл если контейнер переполнен-->
-    <var name="KFine" value="0.01"/>
+    <var name="KFine" value="3.75"/>
     <!---->
 
   </variables>
@@ -120,9 +120,9 @@
   <!--CostRepairs - Стоимость починки машины-->
   <!--image - Изображение машины-->
   <typecar>
-    <type id="1" name="type1" LimitCapacityCar="9600" CostCar="50" FuelConsumption="0.0012" MaxFuel="200" FuelOfBuying="200" SpeedCar="10000" MaintenanceCostsCar="500" CostRepairs="300" image="Images/car.png"/>
-    <type id="2" name="type2" LimitCapacityCar="19200" CostCar="100" FuelConsumption="0.0012" MaxFuel="200" FuelOfBuying="200" SpeedCar="10000" MaintenanceCostsCar="500" CostRepairs="300" image="Images/car.png"/>
-    <type id="3" name="type3" LimitCapacityCar="38400" CostCar="200" FuelConsumption="0.0012" MaxFuel="200" FuelOfBuying="200" SpeedCar="10000" MaintenanceCostsCar="500" CostRepairs="300" image="Images/car.png"/>
+    <type id="1" name="MK-3552-03" LimitCapacityCar="9695" CostCar="42500" FuelConsumption="0.012" MaxFuel="300" FuelOfBuying="300" SpeedCar="10000" MaintenanceCostsCar="500" CostRepairs="300" image="Images/car.png"/>
+    <type id="2" name="MK-3552-11" LimitCapacityCar="18585" CostCar="52300" FuelConsumption="0.015" MaxFuel="500" FuelOfBuying="500" SpeedCar="10000" MaintenanceCostsCar="500" CostRepairs="300" image="Images/car.png"/>
+    <type id="3" name="MK-3548-14" LimitCapacityCar="24500" CostCar="81000" FuelConsumption="0.021" MaxFuel="500" FuelOfBuying="500" SpeedCar="10000" MaintenanceCostsCar="500" CostRepairs="300" image="Images/car.png"/>
   </typecar>
   <local default="ru-RU">
     <text name="Title">
@@ -624,6 +624,14 @@
     <text name="Text62">
       <lang name="ru-RU">
         Такого типа машины ({0}) не сцществует
+      </lang>
+      <lang name="en-US">
+        Test
+      </lang>
+    </text>
+  <text name="Text63">
+      <lang name="ru-RU">
+        Данные на сервер отправлены
       </lang>
       <lang name="en-US">
         Test

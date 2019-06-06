@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using libpathgraph;
 using Util;
+using Newtonsoft.Json.Linq;
 
 namespace libgameobject
 {
@@ -82,7 +83,7 @@ namespace libgameobject
             {
                 //var probability = Tools.rand.NextDouble();
                 //if (probability <= Settings.ProbabilityOfWear)
-                //    wearout = value;
+                wearout = value;
                 if (wearout >= Settings.LimitWearout)
                 {
                     wearout = Settings.LimitWearout;
@@ -118,14 +119,39 @@ namespace libgameobject
                 if (status != value)
                 {
                     status = value;
-                    OnChangeStatus?.Invoke(this);
+                    
                     if (status == CarStatus.Broken)
                     {
                         StatusInfo.t11++;
                         currentPath?.RemovePath();
                     }
-                    ConnectionToServer.SendDataToServer("TODO обновление данных объекта на сервере");
+                    OnChangeStatus?.Invoke(this);
+                    SendChanges();
                 }
+            }
+        }
+
+        private void SendChanges()
+        {
+            JObject newcar = new JObject();
+            newcar["id"] = this.Id;
+            newcar["x"] = this.Position.X;
+            newcar["y"] = this.Position.Y;
+            newcar["fuel"] = this.Fuel;
+            newcar["wearout"] = this.Wearout;
+            newcar["load"] = this.Capacity;
+            newcar["status"] = GetIdStatus();
+            ConnectionToServer.SendChangeCarStatus(newcar.ToString());
+        }
+
+        public int GetIdStatus()
+        {
+            switch(Status)
+            {
+                case CarStatus.Idle: { return 1; }
+                case CarStatus.Run: { return 2; }
+                case CarStatus.Broken: { return 3; }
+                default: return 0;
             }
         }
 
@@ -134,23 +160,14 @@ namespace libgameobject
             Type = type;
             fuel = Type.FuelOfBuying;
             StatusInfo = new CarStatusInfo(this);
-            Position = Simulation.FindStationById(1).Point.Coordinate;
+            //Position = Simulation.FindStationById(1).Point.Coordinate;
+            Position = Simulation.Stations.First().Point.Coordinate;
             Tools.OnChangeScale += Tools_OnChangeScale;
         }
 
         private void Tools_OnChangeScale()
         {
             OnChangePosition?.Invoke(this);
-        }
-
-        public void Reset()
-        {
-            if (!Simulation.SimulationRun)
-            {
-                Fuel = Type.FuelOfBuying;
-                Wearout = Settings.WearoutOfBuying;
-                Capacity = 0;
-            }
         }
 
         public void Repair()
@@ -180,6 +197,7 @@ namespace libgameobject
                 StatusInfo.l3.Add(w);
                 Tools.Message(MessageStatus.Info, string.Format(Util.Localization.GetText("Text2"), Id, Math.Round(w, 2)));
                 UpdateStatusAfterBroken();
+                SendChanges();
             }
             else
             {
@@ -224,6 +242,7 @@ namespace libgameobject
                 StatusInfo.l2.Add(f);
                 Tools.Message(MessageStatus.Info, string.Format(Localization.GetText("Text5"), Id, Math.Round(f, 2)));
                 UpdateStatusAfterBroken();
+                SendChanges();
             }
             else
             {
@@ -287,8 +306,10 @@ namespace libgameobject
             //if (Simulation.Graph.FindingTheNearestPoint(Position) == path.NodeEnd)
             if(Position == path.NodeEnd.Coordinate)
             {
-                Status = CarStatus.Idle;
+                
                 InteractObject(path.NodeEnd);
+                if (Status != CarStatus.Broken)
+                Status = CarStatus.Idle;
             }
             //currentPath = null;
 

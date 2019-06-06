@@ -34,7 +34,7 @@ namespace libgameobject
                 if (repletion != value)
                 {
                     repletion = value;
-                    ConnectionToServer.SendDataToServer("Контейнер изменил статус");
+                    //ConnectionToServer.SendDataToServer("Контейнер изменил статус");
                     if (!repletion)
                     {
                         PayFine();
@@ -43,6 +43,7 @@ namespace libgameobject
                     {
                         StatusInfo.t3++;
                         Tools.Message(MessageStatus.Warning, string.Format(Localization.GetText("Text11"),Id));
+                        //ConnectionToServer.SendConteinerCrowded(Id, Capacity);
                     }
                 }
             }
@@ -62,8 +63,8 @@ namespace libgameobject
                 capacity = value;
                 if (value >= Settings.LimitCapacityContainer)
                 {
-                    Repletion = true;
                     capacity = Settings.LimitCapacityContainer;
+                    Repletion = true;
                 }
                 else
                 {
